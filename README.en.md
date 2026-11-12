@@ -1,18 +1,61 @@
-# Workspace Atlas
+<p align="center">
+  <img src="public/favicon.svg" width="104" height="104" alt="Workspace Atlas logo" />
+</p>
 
-**A small universe for your projects.**
+<h1 align="center">Workspace Atlas</h1>
 
-A Three.js workspace navigator with procedural planets, nebulae, rings and moons. Select a planet to fly toward its project, or start an automatic cruise through your current selection.
+<p align="center"><strong>A three-dimensional home for your projects and ideas</strong></p>
+<p align="center">Turn projects into distinctive planets. Explore your workspace with smooth flights and automatic cruise.</p>
 
-[Live demo](https://cgbpnw5bw4-create.github.io/workspace-atlas/) · [中文说明](README.md) · [MIT License](LICENSE)
+<p align="center">
+  <a href="https://github.com/cgbpnw5bw4-create/workspace-atlas/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/cgbpnw5bw4-create/workspace-atlas/ci.yml?branch=main&amp;label=Build&amp;style=flat-square" alt="Build status" /></a>
+  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><img src="https://img.shields.io/github/actions/workflow/status/cgbpnw5bw4-create/workspace-atlas/pages.yml?branch=main&amp;label=GitHub%20Pages&amp;style=flat-square" alt="GitHub Pages deployment status" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-c9a66b?style=flat-square" alt="MIT License" /></a>
+  <a href="package.json"><img src="https://img.shields.io/badge/Node.js-24%2B-5fa04e?style=flat-square" alt="Node.js 24 or later" /></a>
+  <img src="https://img.shields.io/badge/Graphics-WebGL%202-6e83b7?style=flat-square" alt="WebGL 2" />
+</p>
 
-![Workspace Atlas overview](docs/images/atlas-overview.jpg)
+<p align="center">
+  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><strong>Live demo</strong></a> ·
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#features">Features</a> ·
+  <a href="README.md">简体中文</a>
+</p>
 
-## Run the demo
+---
 
-Requires **Node.js 24** and a modern browser with **WebGL 2**.
+Workspace Atlas is a **Three.js + Vite** project navigator. Procedural nebulae, an accretion disk, planets and orbits form an interactive map of your work. Select a planet to fly closer and explore its project files.
+
+<p align="center">
+  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><img src="docs/images/atlas-overview.jpg" width="100%" alt="A galaxy of 48 fictional projects in Workspace Atlas" /></a>
+  <br />
+  <sub>48 fictional projects · 4 sectors · Ready to explore in your browser</sub>
+</p>
+
+## Features
+
+| Feature | Description |
+| --- | --- |
+| **Procedural planets** | Stable seeds determine each project's terrain, palette, atmosphere, rings and moons. |
+| **Smooth camera flights** | Select a planet, label or project card to approach it and open its panel. |
+| **Automatic cruise** | Visit the current selection in order; drag, scroll or use the takeover button to regain control. |
+| **Project directory** | Search, filter, sort and switch between grid and list views. Favorites stay in the current browser. |
+| **File navigation** | Explore virtual folders in the demo, or connect a local workspace and open files on Windows. |
+| **Two operating modes** | A static demo for sharing, and an optional local mode for your own project folders. |
+
+<p align="center">
+  <img src="docs/images/atlas-project.jpg" width="100%" alt="The Orbital CAD planet with its project file panel" />
+  <br />
+  <sub>From the galaxy overview to an individual project</sub>
+</p>
+
+## Quick start
+
+**Requirements:** Node.js **24 or later**, and a modern browser with **WebGL 2**.
 
 ```sh
+git clone https://github.com/cgbpnw5bw4-create/workspace-atlas.git
+cd workspace-atlas
 npm ci
 npm run dev
 ```
@@ -26,17 +69,27 @@ npm run preview
 
 The generated `dist/` folder is a static site suitable for GitHub Pages.
 
-## Explore
+## Controls
 
-- Drag to orbit; scroll to zoom. Both take over an active cruise.
-- Select a planet, label or project card to fly closer and open its panel.
-- Use `Ctrl+K` / `⌘K` to search, and `Esc` to stop a cruise, cancel a flight or close a panel.
-- Filter by group, switch between grid and list, and save favorites in your browser.
-- Automatic cruise follows the current project selection. Pause controls ambient animation.
+| Action | Result |
+| --- | --- |
+| Drag / scroll | Orbit / zoom; take over an active cruise |
+| Select a planet, label or project | Fly closer and open its panel |
+| `Ctrl+K` / `⌘K` | Focus project search, or file filtering when the file panel is open |
+| `Esc` | Stop cruise, cancel a flight or close the current panel |
+| Automatic cruise | Visit the current project selection in order |
+| Pause / reset | Control ambient animation / return to the overview |
 
-![Project arrival and file panel](docs/images/atlas-project.jpg)
+## Operating modes
 
-## Optional local workspace
+| | Online / static demo | Local workspace |
+| --- | --- | --- |
+| Projects | 48 fictional projects across 4 sectors | An explicitly configured local root |
+| Files | Virtual folders in the browser | Real directories and file entries |
+| Services | Simulated states and controls; no system commands | No business service integrations |
+| Start | Live demo or `npm run dev` | Set `ATLAS_ROOT`, then run `npm start` |
+
+### Connect a local directory
 
 Organize folders as `workspace/group/project`. Explicitly set your own root to enable local browsing:
 
@@ -52,10 +105,33 @@ Directory browsing is cross-platform. Opening files with their default applicati
 
 **Keep the local API on loopback. Do not expose it through a public tunnel or reverse proxy.** Publish only the static demo to GitHub Pages.
 
-## Implementation and limits
+Clear the variable to restore the default demo: `Remove-Item Env:ATLAS_ROOT`.
 
-`src/main.js` handles navigation, `src/scene.js` owns the scene and camera, `src/planets.js` generates planets, and `src/nebula.js` renders the background. `server.mjs` provides the optional local API. Boundary tests live in `tests/`.
+## Project structure
 
-This is an artistic visualization, not an astronomical simulation. Performance depends on your GPU; the project directory remains available when 3D acceleration cannot start. The build may report a scene chunk larger than 500 kB.
+| Path | Responsibility |
+| --- | --- |
+| `src/main.js` | Project directory, search, favorites and file panels |
+| `src/scene.js` | 3D scene, camera flights and automatic cruise |
+| `src/planets.js` | Procedural planets, rings and moons |
+| `src/nebula.js` | Procedural nebula background |
+| `src/demo.js` | Fictional projects, directories and service states |
+| `server.mjs` | Optional local directory API and static file server |
+| `tests/` | Demo behavior and local API boundary tests |
 
-Released under the [MIT License](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for dependency attribution.
+Run checks: `npm test` · `npm run build`
+
+## Known limitations
+
+- The galaxy is an artistic navigation scene, not an astronomical or physical simulation.
+- Rendering performance depends on the device and GPU. When WebGL initialization fails, the project directory remains available; automatic cruise is unavailable.
+- Demo projects, files and service states are fictional and do not connect to real business services.
+- The scene bundle currently exceeds 500 kB, producing a size warning without preventing a successful build.
+
+## Contributing
+
+Use [Issues](https://github.com/cgbpnw5bw4-create/workspace-atlas/issues) to report bugs or suggest improvements. Pull requests are welcome. Include your browser version, operating system and reproduction steps in bug reports.
+
+## License
+
+Released under the [MIT License](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for dependency attribution and licenses.
