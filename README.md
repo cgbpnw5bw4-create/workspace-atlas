@@ -4,7 +4,7 @@
 
 一个由 Three.js 驱动的三维工作空间导航：每个项目都是外观独特的星球，点击后平滑飞近，自动巡航依次掠过各个项目。程序化生成的星云、吸积盘、星环和卫星组成整个场景，无需下载外部贴图。
 
-[在线演示](https://cgbpnw5bw4-create.github.io/workspace-atlas/) · [English](README.en.md) · [发布指南](docs/PUBLISHING.md) · [MIT License](LICENSE)
+[在线演示](https://cgbpnw5bw4-create.github.io/workspace-atlas/) · [English](README.en.md) · [MIT License](LICENSE)
 
 ![Workspace Atlas 星海总览](docs/images/atlas-overview.jpg)
 
@@ -36,7 +36,7 @@ npm run build
 npm run preview
 ```
 
-`dist/` 可以部署为静态网站，包括 GitHub Pages；[发布步骤](docs/PUBLISHING.md)说明了仓库上传和手动部署方式。
+`dist/` 可以部署为静态网站，包括 GitHub Pages。
 
 ## 操作
 
@@ -91,8 +91,6 @@ npm start
 ## 局限
 
 这是用于工作空间导航和视觉展示的艺术场景，不是天文模拟。演示项目、文件和服务状态均为虚构，刷新不会连接真实业务服务。WebGL 场景在低性能设备上可能较慢；无法启用 3D 加速时仍可使用项目目录。当前构建可能提示场景分块超过 500 kB，该提示不影响构建完成。
-
-本次测试输入、结果及未验证部分见[验证记录](docs/VALIDATION.md)。
 
 ## 许可证
 

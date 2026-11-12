@@ -4,7 +4,7 @@
 
 A Three.js workspace navigator with procedural planets, nebulae, rings and moons. Select a planet to fly toward its project, or start an automatic cruise through your current selection.
 
-[Live demo](https://cgbpnw5bw4-create.github.io/workspace-atlas/) · [中文说明](README.md) · [Publishing guide (Chinese)](docs/PUBLISHING.md) · [MIT License](LICENSE)
+[Live demo](https://cgbpnw5bw4-create.github.io/workspace-atlas/) · [中文说明](README.md) · [MIT License](LICENSE)
 
 ![Workspace Atlas overview](docs/images/atlas-overview.jpg)
 
@@ -24,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-The generated `dist/` folder is a static site suitable for GitHub Pages. The included Pages workflow is triggered manually; see the [publishing guide](docs/PUBLISHING.md).
+The generated `dist/` folder is a static site suitable for GitHub Pages.
 
 ## Explore
 
