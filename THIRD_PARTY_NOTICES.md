@@ -2,7 +2,7 @@
 
 ## Three.js
 
-Workspace Atlas uses Three.js and its addon modules to render the scene. The built demo contains Three.js code.
+Workspace Atlas uses Three.js and its addon modules to render the scene. The built application contains Three.js code.
 
 - Project: https://threejs.org/
 - Source: https://github.com/mrdoob/three.js
@@ -36,7 +36,7 @@ THE SOFTWARE.
 
 ## Vite
 
-Vite is a development and build tool; its runtime is not served as part of the production demo.
+Vite is a development and build tool; its runtime is not served as part of the production application.
 
 - Project: https://vite.dev/
 - Source: https://github.com/vitejs/vite
@@ -47,4 +47,4 @@ When redistributing Vite itself or an installed dependency tree, retain each pac
 
 ## Visual assets
 
-The scene's starfield, nebulae, planets, rings and moons are generated in code. The included overview and project screenshots show the fictional demo data.
+The scene's starfield, nebulae, planets, rings and moons are generated in code. The included overview and project screenshots show sample workspace data.
