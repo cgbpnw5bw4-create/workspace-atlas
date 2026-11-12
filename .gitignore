@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.runtime/
+.env
+.env.*
+*.log
+*.zip
+*.pem
+*.key
+*.pfx
+*.p12
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
