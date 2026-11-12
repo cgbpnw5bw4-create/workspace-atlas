@@ -8,6 +8,7 @@
 <p align="center">Turn projects into distinctive planets. Explore your workspace with smooth flights and automatic cruise.</p>
 
 <p align="center">
+  <a href="https://github.com/cgbpnw5bw4-create/workspace-atlas/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/Version-v1.0.0-c9a66b?style=flat-square" alt="Workspace Atlas 1.0 stable release" /></a>
   <a href="https://github.com/cgbpnw5bw4-create/workspace-atlas/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/cgbpnw5bw4-create/workspace-atlas/ci.yml?branch=main&amp;label=Build&amp;style=flat-square" alt="Build status" /></a>
   <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><img src="https://img.shields.io/github/actions/workflow/status/cgbpnw5bw4-create/workspace-atlas/pages.yml?branch=main&amp;label=GitHub%20Pages&amp;style=flat-square" alt="GitHub Pages deployment status" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-c9a66b?style=flat-square" alt="MIT License" /></a>
@@ -16,7 +17,8 @@
 </p>
 
 <p align="center">
-  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><strong>Live demo</strong></a> ·
+  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><strong>Try online</strong></a> ·
+  <a href="https://github.com/cgbpnw5bw4-create/workspace-atlas/releases/tag/v1.0.0">Release notes</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#features">Features</a> ·
   <a href="README.md">简体中文</a>
@@ -27,9 +29,17 @@
 Workspace Atlas is a **Three.js + Vite** project navigator. Procedural nebulae, an accretion disk, planets and orbits form an interactive map of your work. Select a planet to fly closer and explore its project files.
 
 <p align="center">
-  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><img src="docs/images/atlas-overview.jpg" width="100%" alt="A galaxy of 48 fictional projects in Workspace Atlas" /></a>
+  <a href="https://cgbpnw5bw4-create.github.io/workspace-atlas/"><img src="docs/images/atlas-overview.jpg" width="100%" alt="A galaxy of 48 sample projects in Workspace Atlas" /></a>
   <br />
-  <sub>48 fictional projects · 4 sectors · Ready to explore in your browser</sub>
+  <sub>48 sample projects · 4 sectors · Ready to explore in your browser</sub>
+</p>
+
+## See it in motion
+
+<p align="center">
+  <img src="docs/images/atlas-exploration.webp" width="100%" alt="Recorded Workspace Atlas interaction: automatic cruise and clicking a planet to enter its project" />
+  <br />
+  <sub>Recorded in the application: automatic cruise → return to the galaxy → click a planet → smooth flight into its project</sub>
 </p>
 
 ## Features
@@ -40,11 +50,11 @@ Workspace Atlas is a **Three.js + Vite** project navigator. Procedural nebulae, 
 | **Smooth camera flights** | Select a planet, label or project card to approach it and open its panel. |
 | **Automatic cruise** | Visit the current selection in order; drag, scroll or use the takeover button to regain control. |
 | **Project directory** | Search, filter, sort and switch between grid and list views. Favorites stay in the current browser. |
-| **File navigation** | Explore virtual folders in the demo, or connect a local workspace and open files on Windows. |
-| **Two operating modes** | A static demo for sharing, and an optional local mode for your own project folders. |
+| **File navigation** | Explore sample folders in the showcase, or connect a local workspace and open files on Windows. |
+| **Two operating modes** | A galaxy showcase to explore online, and an optional local mode for your own project folders. |
 
 <p align="center">
-  <img src="docs/images/atlas-project.jpg" width="100%" alt="The Orbital CAD planet with its project file panel" />
+  <img src="docs/images/atlas-project.jpg" width="100%" alt="A planet's project file panel after clicking it and flying closer" />
   <br />
   <sub>From the galaxy overview to an individual project</sub>
 </p>
@@ -60,7 +70,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. The default demo includes **48 fictional projects** across Engineering, Design, Research and Archive. Files and service states are simulated. No account, API key, local filesystem scan or business backend is required.
+Open the local URL printed by Vite. The default showcase includes **48 sample projects** across Engineering, Design, Research and Archive. Files are virtual, and service states and controls are simulated. No account, API key, local filesystem scan or business backend is required.
 
 ```sh
 npm run build
@@ -82,12 +92,12 @@ The generated `dist/` folder is a static site suitable for GitHub Pages.
 
 ## Operating modes
 
-| | Online / static demo | Local workspace |
+| | Galaxy showcase | Local workspace |
 | --- | --- | --- |
-| Projects | 48 fictional projects across 4 sectors | An explicitly configured local root |
+| Projects | 48 sample projects across 4 sectors | An explicitly configured local root |
 | Files | Virtual folders in the browser | Real directories and file entries |
 | Services | Simulated states and controls; no system commands | No business service integrations |
-| Start | Live demo or `npm run dev` | Set `ATLAS_ROOT`, then run `npm start` |
+| Start | Try online or `npm run dev` | Set `ATLAS_ROOT`, then run `npm start` |
 
 ### Connect a local directory
 
@@ -101,11 +111,11 @@ npm start
 
 Open `http://127.0.0.1:4317`; the server redirects to local mode. Set `ATLAS_PORT` to change the port. On Linux/macOS, use `ATLAS_ROOT=/path/to/workspace npm start`.
 
-Directory browsing is cross-platform. Opening files with their default application and revealing files in Explorer require Windows; other platforms return an unsupported-operation response. The generic local mode does not include business service launch commands and returns an empty service list. Without `ATLAS_ROOT`, `npm start` serves the demo.
+Directory browsing is cross-platform. Opening files with their default application and revealing files in Explorer require Windows; other platforms return an unsupported-operation response. The generic local mode does not include business service launch commands and returns an empty service list. Without `ATLAS_ROOT`, `npm start` serves the galaxy showcase.
 
-**Keep the local API on loopback. Do not expose it through a public tunnel or reverse proxy.** Publish only the static demo to GitHub Pages.
+**Keep the local API on loopback. Do not expose it through a public tunnel or reverse proxy.** GitHub Pages serves the static galaxy showcase.
 
-Clear the variable to restore the default demo: `Remove-Item Env:ATLAS_ROOT`.
+Clear the variable to restore the default showcase: `Remove-Item Env:ATLAS_ROOT`.
 
 ## Project structure
 
@@ -115,9 +125,9 @@ Clear the variable to restore the default demo: `Remove-Item Env:ATLAS_ROOT`.
 | `src/scene.js` | 3D scene, camera flights and automatic cruise |
 | `src/planets.js` | Procedural planets, rings and moons |
 | `src/nebula.js` | Procedural nebula background |
-| `src/demo.js` | Fictional projects, directories and service states |
+| `src/sample.js` | Sample projects, directories and service states |
 | `server.mjs` | Optional local directory API and static file server |
-| `tests/` | Demo behavior and local API boundary tests |
+| `tests/` | Showcase behavior and local API boundary tests |
 
 Run checks: `npm test` · `npm run build`
 
@@ -125,12 +135,14 @@ Run checks: `npm test` · `npm run build`
 
 - The galaxy is an artistic navigation scene, not an astronomical or physical simulation.
 - Rendering performance depends on the device and GPU. When WebGL initialization fails, the project directory remains available; automatic cruise is unavailable.
-- Demo projects, files and service states are fictional and do not connect to real business services.
+- Sample projects and virtual files populate the showcase. Service states and controls are simulated; they do not connect to real business services or execute system commands.
 - The scene bundle currently exceeds 500 kB, producing a size warning without preventing a successful build.
 
 ## Contributing
 
-Use [Issues](https://github.com/cgbpnw5bw4-create/workspace-atlas/issues) to report bugs or suggest improvements. Pull requests are welcome. Include your browser version, operating system and reproduction steps in bug reports.
+Creative visual ideas are welcome: planetary terrain, nebula palettes, camera movements and new interactions. Share your ideas, reference images or implementations through [Issues](https://github.com/cgbpnw5bw4-create/workspace-atlas/issues) or a Pull Request, and help shape this galaxy.
+
+Bug reports and feature suggestions are welcome too. Include your browser version, operating system and reproduction steps in bug reports.
 
 ## License
 

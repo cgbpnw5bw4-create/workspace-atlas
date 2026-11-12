@@ -95,19 +95,19 @@ test('local server respects filesystem and request boundaries', async t => {
   assert.equal(rawStatus, 404);
 });
 
-test('demo mode serves only the static demonstration', async t => {
+test('showcase mode serves only the static site', async t => {
   const server = await createAtlasServer({ dist: path.join(import.meta.dirname, '..', 'public') });
   server.listen(0, '127.0.0.1');
   await once(server, 'listening');
   t.after(() => new Promise(resolve => server.close(resolve)));
   const base = `http://127.0.0.1:${server.address().port}`;
-  assert.deepEqual(await (await fetch(`${base}/api/catalog`)).json(), { mode: 'demo' });
+  assert.deepEqual(await (await fetch(`${base}/api/catalog`)).json(), { mode: 'showcase' });
   assert.equal((await fetch(`${base}/api/browse`)).status, 409);
   assert.equal((await fetch(`${base}/favicon.svg`)).status, 200);
   assert.equal((await fetch(`${base}/api/open`, { method: 'POST', body: '{}' })).status, 403);
 });
 
-test('an explicitly invalid root does not fall back to demo mode', async () => {
+test('an explicitly invalid root does not fall back to showcase mode', async () => {
   await assert.rejects(createAtlasServer({ root: '' }), /ATLAS_ROOT/);
   await assert.rejects(createAtlasServer({ root: path.join(os.tmpdir(), 'atlas-root-that-does-not-exist', 'workspace') }), { code: 'ENOENT' });
   await assert.rejects(createAtlasServer({ root: fileURLToPath(import.meta.url) }), /ATLAS_ROOT/);

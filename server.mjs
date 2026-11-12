@@ -68,7 +68,7 @@ export async function createAtlasServer({ root, dist = path.join(here, 'dist') }
   const token = randomBytes(24).toString('hex');
 
   async function workspacePath(input) {
-    if (root === undefined) fail(409, '演示模式不访问本机文件；请设置 ATLAS_ROOT 后启动');
+    if (root === undefined) fail(409, '星海展示使用示例数据；请设置 ATLAS_ROOT 后访问本机文件');
     if (typeof input !== 'string' || input.includes('\0')) fail(400, '路径无效');
     const candidate = path.resolve(root, input);
     const permitted = file => inside(root, file) && path.relative(root, file).split(path.sep).every(part => !part || visible(part));
@@ -140,9 +140,9 @@ export async function createAtlasServer({ root, dist = path.join(here, 'dist') }
       if (!hosts.includes(req.headers.host)) fail(403, '仅接受本机访问');
       if (req.headers.origin && !hosts.map(host => `http://${host}`).includes(req.headers.origin)) fail(403, '访问来源无效');
       const url = new URL(req.url, `http://${req.headers.host}`);
-      if (req.method === 'GET' && url.pathname === '/api/catalog') return json(200, root === undefined ? { mode: 'demo' } : await scan());
+      if (req.method === 'GET' && url.pathname === '/api/catalog') return json(200, root === undefined ? { mode: 'showcase' } : await scan());
       if (req.method === 'GET' && url.pathname === '/api/browse') return json(200, await browse(url.searchParams.get('path') ?? ''));
-      if (req.method === 'GET' && url.pathname === '/api/health') return json(200, { ok: true, name: 'Workspace Atlas', mode: root === undefined ? 'demo' : 'local' });
+      if (req.method === 'GET' && url.pathname === '/api/health') return json(200, { ok: true, name: 'Workspace Atlas', mode: root === undefined ? 'showcase' : 'local' });
       if (req.method === 'POST' && ['/api/open', '/api/reveal'].includes(url.pathname)) {
         if (req.headers['x-atlas-token'] !== token) fail(403, '请刷新页面后重试');
         return json(200, await openPath(await requestPath(req), url.pathname === '/api/reveal'));

@@ -1,8 +1,8 @@
 import './style.css';
-import { demoRequest } from './demo.js';
+import { sampleRequest } from './sample.js';
 
 const isLocal = new URLSearchParams(location.search).get('mode') === 'local';
-const favoriteKey = isLocal ? 'atlas-local-favorites' : 'atlas-demo-favorites';
+const favoriteKey = isLocal ? 'atlas-local-favorites' : 'atlas-showcase-favorites';
 
 const paths = {
   orbit: '<ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-40 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(40 12 12)"/><circle cx="12" cy="12" r="1.5"/>',
@@ -84,7 +84,7 @@ $('#app').innerHTML = `
 let toastTimer;
 function toast(message) { $('#toast').textContent=message; $('#toast').hidden=false; clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('#toast').hidden=true,4200); }
 async function api(url, body) {
-  if (!isLocal) return demoRequest(url, body);
+  if (!isLocal) return sampleRequest(url, body);
   const response = await fetch(url,body === undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json','x-atlas-token':state.catalog.token},body:JSON.stringify(body)});
   const data=await response.json();
   if(!response.ok) throw new Error(data.error || '操作未完成');
@@ -143,9 +143,9 @@ function projects() {
   });
 }
 function updateNavigation() {
-  $('.local-status').innerHTML=`<i class="live-dot"></i> ${isLocal?'本机工作空间':'交互演示 · 虚构项目'}`;
-  $('#root-folder').title=isLocal?'在资源管理器中打开':'查看演示路径';
-  $('#root-folder').innerHTML=esc(isLocal?state.catalog.root:'演示工作空间')+' '+icon('external');
+  $('.local-status').innerHTML=`<i class="live-dot"></i> ${isLocal?'本机工作空间':'Workspace Atlas 1.0 · 星海展示'}`;
+  $('#root-folder').title=isLocal?'在资源管理器中打开':'查看示例路径';
+  $('#root-folder').innerHTML=esc(isLocal?state.catalog.root:'示例工作空间')+' '+icon('external');
   $('#metric-online').nextElementSibling.textContent=isLocal?'在线服务':'示例在线';
   document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('active',el.dataset.view===state.view&&state.group==='all'));
   $('#group-nav').innerHTML=state.catalog.groups.map(g=>`<button class="group-item ${state.group===g.id?'active':''}" data-group="${esc(g.id)}"><span class="group-dot" style="--group-color:${groupColor(g.name)}"></span><span>${esc(g.name)}</span><b>${g.count}</b></button>`).join('');
@@ -180,7 +180,7 @@ function positionLabels(positions) {
 }
 const projectSymbol=p=>icon(p.services.length?'code':/CAD|模型|图纸/i.test(p.name)?'cube':/Archive|Notes|工作|文档|Docs/i.test(p.name)?'file':'orbit');
 function serviceHTML(s,p,compact=false) {
-  return `<div class="service-row ${compact?'compact':''}"><div class="service-icon">${icon('server')}</div><div class="service-info"><strong>${esc(s.name)}</strong><span><i class="status-dot ${s.online?'online':''}"></i>演示 · ${s.online?'运行中':'未运行'}</span></div><div class="service-actions"><button class="small-button" data-service="${esc(s.id)}">模拟${s.online?'停止':'启动'}</button></div></div>`;
+  return `<div class="service-row ${compact?'compact':''}"><div class="service-icon">${icon('server')}</div><div class="service-info"><strong>${esc(s.name)}</strong><span><i class="status-dot ${s.online?'online':''}"></i>示例 · ${s.online?'运行中':'未运行'}</span></div><div class="service-actions"><button class="small-button" data-service="${esc(s.id)}">模拟${s.online?'停止':'启动'}</button></div></div>`;
 }
 function render() {
   if(!state.catalog) return;
@@ -188,7 +188,7 @@ function render() {
   const list=projects();
   const title=state.group!=='all'?state.group:({projects:'我的项目',favorites:'我的收藏',services:'服务控制台'}[state.view]);
   $('#library-title').innerHTML=`${esc(title)} <span>${state.view==='services'?list.reduce((n,p)=>n+p.services.length,0):list.length}</span>`;
-  $('#library-subtitle').textContent=state.view==='services'?(isLocal?'当前通用本地模式提供文件导航。':'服务状态与启停均为演示，不执行本机命令。'):state.view==='favorites'?'把常用的坐标，留在手边。':state.group!=='all'?state.catalog.groups.find(g=>g.id===state.group).path:'从这里，继续你的创造。';
+  $('#library-subtitle').textContent=state.view==='services'?(isLocal?'当前通用本地模式提供文件导航。':'服务状态与启停均为模拟，不执行本机命令。'):state.view==='favorites'?'把常用的坐标，留在手边。':state.group!=='all'?state.catalog.groups.find(g=>g.id===state.group).path:'从这里，继续你的创造。';
   $('#filter-line').innerHTML=state.query?`<span>搜索“${esc(state.query)}”</span><button id="clear-query">清除搜索 ${icon('close')}</button>`:state.group!=='all'?`<span class="directory-label">${icon('folder')} ${esc(state.group)} 目录中的全部项目</span><button id="open-group">浏览此目录 ${icon('chevron')}</button>`:'';
   $('#filter-line').classList.toggle('visible',Boolean(state.query||state.group!=='all'));
   const el=$('#project-list');
